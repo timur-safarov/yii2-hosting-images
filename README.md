@@ -13,7 +13,7 @@
 
 # API
 * Получение всех картинок
-- /api-images
+/api-images
 
 * Получение конкретной картинки
-- /api-images/<id>
+/api-images/{id}
