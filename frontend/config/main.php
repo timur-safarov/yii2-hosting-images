@@ -16,6 +16,10 @@ return [
         'request' => [
             'csrfParam' => '_csrf-frontend',
             'baseUrl' => '',
+            // Включение JSON на прием данных
+            'parsers' => [
+                'application/json' => 'yii\web\JsonParser',
+            ]
         ],
         'user' => [
             'identityClass' => 'common\models\User',
@@ -42,12 +46,19 @@ return [
             
             'enablePrettyUrl' => true,
             'showScriptName' => false,
+            'enableStrictParsing' => true,
 
             'rules' => [
-                '' => 'image/upload',
+                // Включаем вывод API для наших контроллеров
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'api-user'],
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'api-image'],
                 '<controller:\w+>/<action:\w+>/' => '<controller>/<action>',
+                '' => 'image/upload',
                 'image/delete-url-ajax/<id:\d+>' => 'image/delete-url-ajax',
-                'catalog/<page:\d+>' => '/image/catalog'
+                'upload' => '/image/upload',
+                'catalog' => '/image/catalog',
+                'zip-arhive/<file_name:[\w\W\-]+>' => '/image/zip-arhive',
+                
             ],
         ],
     ],

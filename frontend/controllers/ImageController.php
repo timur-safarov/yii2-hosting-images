@@ -13,20 +13,14 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use common\models\Image;
 use yii\web\NotFoundHttpException;
-
 use common\helpers\Common;
-use Defuse\Crypto\Key;
-use Defuse\Crypto\Crypto;
-
+use common\models\search\ImageSearch;
 
 /**
  * Site controller
  */
 class ImageController extends Controller
 {
-
-
-
 
     /**
      * {@inheritdoc}
@@ -94,11 +88,16 @@ class ImageController extends Controller
         ]);
     }
 
-    public function actionCatalog($page)
+    public function actionCatalog()
     {
 
-        echo 'Catalog';
-        die;
+        $searchModel = new ImageSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
+
+        return $this->render('catalog', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
 
     }
 
@@ -198,11 +197,53 @@ class ImageController extends Controller
             echo Json::encode($json);
 
         } else {
-            //Иначе скажем что страница не найдена
+            // Иначе скажем что страница не найдена
             throw new NotFoundHttpException('Страница не найдена.');
         }
 
     }
+
+
+    /**
+     * Скачиваем файл в Zip архиве
+     * 
+     */
+    public function actionZipArhive($file_name): void
+    {
+
+        if (Yii::$app->request->isPost) {
+
+            $file_path = Image::getFileFolder().$file_name;
+
+            if (file_exists($file_path)) {
+
+                $zip_path = $file_name.'.zip';
+
+                $zip = new \ZipArchive();
+                $zip->open($zip_path, \ZIPARCHIVE::CREATE);
+
+                // добавляем файлы в архив
+                // Если не указать второй параметр в addFile
+                // То сохраняться все папки, внутри кооторых будет файл
+                $zip->addFile($file_path, $file_name);
+                $zip->close();
+
+                if (file_exists($zip_path)) {
+                    \Yii::$app->response->sendFile($zip_path, $file_name.'.zip');
+                    ignore_user_abort(true);//удаление временного файла
+                    if (connection_aborted()) unlink($zip_path);
+                    register_shutdown_function('unlink', $zip_path);
+                }
+
+            }
+
+        } else {
+            // Иначе скажем что страница не найдена
+            throw new NotFoundHttpException('Страница не найдена.');
+        }
+
+    }
+
 
 
 }

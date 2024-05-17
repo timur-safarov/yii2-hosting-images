@@ -23,12 +23,17 @@ use yii\base\InvalidArgumentException;
  */
 class Image extends \yii\db\ActiveRecord
 {
+
+    public $file_img;
+
+
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'image';
+        // return 'image';
+        return '{{%image}}';
     }
 
     /**
@@ -68,6 +73,7 @@ class Image extends \yii\db\ActiveRecord
             'ext' => 'Тип файла',
             'size' => 'Размер файла',
             'created_at' => 'Дата создания',
+            'file_img' => 'Картинка'
         ];
     }
 

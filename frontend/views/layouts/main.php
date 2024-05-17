@@ -38,8 +38,8 @@ AppAsset::register($this);
         // ['label' => 'Home', 'url' => ['/site/index']],
         // ['label' => 'About', 'url' => ['/site/about']],
         // ['label' => 'Contact', 'url' => ['/site/contact']],
-        ['label' => 'Загрузка картинок', 'url' => ['/image/upload']],
-        ['label' => 'Все картинки', 'url' => ['/image/catalog']],
+        ['label' => 'Загрузка картинок', 'url' => ['/']],
+        ['label' => 'Все картинки', 'url' => ['/catalog']],
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];

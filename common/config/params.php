@@ -15,6 +15,8 @@ return [
     'allowedFileExtensions' => [
         'jpg', 'png', 'gif', 'jpeg', 'ico', 'bmp',
     ],
-    'filePath' => '/images/'
+    'filePath' => '/images/',
+    'tempFolder' => '/temp/',
+    'icon-framework' => 'fa', 
 
 ];
