@@ -6,6 +6,7 @@
 
 # Поставить права на папку с картинками
 ```sudo chmod -R 777 frontend/web/images/```
+
 ```sudo chown -R www-data:www-data frontend/web/images/```
 
 - Или просто удалить папку если она пустая, а при записи файлов
