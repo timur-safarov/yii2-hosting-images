@@ -58,6 +58,7 @@ return [
                 'upload' => '/image/upload',
                 'catalog' => '/image/catalog',
                 'zip-arhive/<file_name:[\w\W\-]+>' => '/image/zip-arhive',
+                'image/upload-url-ajax' => 'image/upload-url-ajax'
                 
             ],
         ],
