@@ -1,5 +1,6 @@
 <?php
 return [
+    'name' => 'Хостинг картинок',
     'language' => 'ru-RU',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
