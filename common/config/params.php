@@ -10,7 +10,7 @@ return [
     'bsVersion' => '5.x',
     'bsDependencyEnabled' => true,
     'pageSize' => 5, //Количество записей настраницу
-    'maxSize' => 1024 * 1024 * 100, //Максимальный размер для загрузки файлов
+    'maxFileSize' => 1024 * 1024 * 100, //Максимальный размер для загрузки файлов
     'maxFileCount' => 5,
     'allowedFileExtensions' => [
         'jpg', 'png', 'gif', 'jpeg', 'ico', 'bmp',

@@ -119,7 +119,8 @@ $this->registerCss('
                                                         'resumableUploadOptions' => [
                                                             'fallback' => null,
                                                             'testUrl' => null,
-                                                            'chunkSize' => 2048, // in KB
+                                                            // Этот параметр тоже ограничевает размер файла для загрузки
+                                                            'chunkSize' => Yii::$app->params['maxFileSize'], // in KB
                                                             'maxThreads' => 1,
                                                             'maxRetries' => 1,
                                                             'showErrorLog' => true,
@@ -133,7 +134,7 @@ $this->registerCss('
                                                         'dropZoneTitle' => 'Загрузить?',
                                                         'dropZoneClickTitle' => '', 
                                                         'maxFileCount' => Yii::$app->params['maxFileCount'],
-                                                        'maxFileSize' => Yii::$app->params['maxSize'],
+                                                        'maxFileSize' => Yii::$app->params['maxFileSize'],
                                                         'browseLabel' => 'Выбрать файлы',
                                                         'uploadLabel' => 'Загрузить файлы',
                                                         'removeLabel' => 'Удалить файлы',

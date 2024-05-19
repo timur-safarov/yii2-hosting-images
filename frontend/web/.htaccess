@@ -12,3 +12,8 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 # В противном случае перенаправляем на index.php
 RewriteRule . index.php
+
+
+php_flag post_max_size 1G
+php_flag memory_limit 1G
+php_flag upload_max_filesize 1G

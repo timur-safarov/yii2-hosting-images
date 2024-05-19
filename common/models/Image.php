@@ -52,7 +52,7 @@ class Image extends \yii\db\ActiveRecord
                 'file',
                 'skipOnEmpty' => true,
                 'extensions' => implode(',', Yii::$app->params['allowedFileExtensions']),
-                'maxSize' => Yii::$app->params['maxSize'],
+                'maxSize' => Yii::$app->params['maxFileSize'],
                 'maxFiles' => Yii::$app->params['maxFileCount'],
                 //если мы хотим чтобы файлы отправлялись только после сохранения в виджете
                 //fileInput тогда пишем tooMany
@@ -231,7 +231,25 @@ class Image extends \yii\db\ActiveRecord
             $newFileUrl  = $url_folder . $file_name . '.' . $ext;
             $type = Common::fileType($inputFile->name);
 
+
+            // Обязательно делаем проверку, есть ли такой файл так 
+            // Так как FileInput отправляет файлы по 3 раза каждый
             if (!file_exists($newFilePath)) {
+
+                // Проверка параметров
+                // $arr = [
+                //     "Upload: " => $_FILES["fileBlob"]["name"] . "<br>",
+                //     "Type: " => $_FILES["fileBlob"]["type"] . "<br>",
+                //     "Size: " => ($_FILES["fileBlob"]["size"] / 1024) . " kB<br>",
+                //     "Temp file: " => $_FILES["fileBlob"]["tmp_name"] . "<br>"
+                // ];
+
+                // file_put_contents(
+                //     'post.log',
+                //     print_r($arr, true) . "\n\r",
+                //     FILE_APPEND
+                // );
+                
 
                 // Виджет FileInput сам проверяет есть ли такой файл в списке файлов
                 // Поэтому мы можем не проверять есть ли он уже или нет
